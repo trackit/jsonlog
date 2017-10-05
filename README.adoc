@@ -24,12 +24,24 @@ func main() {
 }
 ----
 
-This code produces the following output:
+This code produces the following output (the JSON objects were prettified, the
+library outputs each object on a single line and without unnecessary spaces):
 
 [source,json]
 ----
-{"message":"Info log message","level":"info","time":"2017-10-05T21:07:58.115210089+02:00"}
-{"message":"Warning with data","level":"warning","time":"2017-10-05T21:07:58.115320884+02:00","data":{"foobar":42}}
+{
+  "message": "Info log message",
+  "level": "info",
+  "time": "2017-10-05T21:07:58.115210089+02:00"
+}
+{
+  "message": "Warning with data",
+  "level": "warning",
+  "time": "2017-10-05T21:07:58.115320884+02:00",
+  "data": {
+    "foobar": 42
+  }
+}
 ----
 
 === Choosing the log level
