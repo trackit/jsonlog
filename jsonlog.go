@@ -42,7 +42,7 @@ const (
 	LogLevelWarning
 	LogLevelError
 
-	LoggerContextKey = contextKey(iota)
+	contextKeyLogger = contextKey(iota)
 )
 
 var (
@@ -171,10 +171,16 @@ func (l Logger) WithContextKey(contextKey interface{}, messageKey string) Logger
 	return newLogger
 }
 
+// ContextWithLogger creates a new context holding a given logger.
+// The logger can be retrieved with LoggerFromContextOrDefault.
+func ContextWithLogger(ctx context.Context, logger Logger) context.Context {
+	return context.WithValue(ctx, contextKeyLogger, logger)
+}
+
 // LoggerFromContextOrDefault gets a Logger from the current context if there
 // is one. Otherwise it returns the default logger.
 func LoggerFromContextOrDefault(ctx context.Context) Logger {
-	value := ctx.Value(LoggerContextKey)
+	value := ctx.Value(contextKeyLogger)
 	logger, ok := value.(Logger)
 	if ok {
 		return logger
