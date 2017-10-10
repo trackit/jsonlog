@@ -14,6 +14,10 @@ import (
 // will only log messages with a log level superior or equal to its own.
 type LogLevel uint
 
+// contextKey lets the jsonlog module define keys to Context.Value which will
+// not collide with anything else.
+type contextKey uint
+
 // Logger logs messages to an io.Writer in JSON format, possibly extracting
 // values from its Context.
 type Logger struct {
@@ -37,6 +41,8 @@ const (
 	LogLevelInfo
 	LogLevelWarning
 	LogLevelError
+
+	LoggerContextKey = contextKey(iota)
 )
 
 var (
@@ -163,6 +169,18 @@ func (l Logger) WithContextKey(contextKey interface{}, messageKey string) Logger
 		newLogger.contextKeys[contextKey] = messageKey
 	}
 	return newLogger
+}
+
+// LoggerFromContextOrDefault gets a Logger from the current context if there
+// is one. Otherwise it returns the default logger.
+func LoggerFromContextOrDefault(ctx context.Context) Logger {
+	value := ctx.Value(LoggerContextKey)
+	logger, ok := value.(Logger)
+	if ok {
+		return logger
+	} else {
+		return DefaultLogger
+	}
 }
 
 // shallowCopyMap makes a shallow copy of a map[interface{}]string.
