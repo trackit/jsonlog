@@ -77,6 +77,23 @@ func (l Logger) Warning(str string, data interface{}) error { return l.Log(LogLe
 // Error is a shorthand for logging with level Error.
 func (l Logger) Error(str string, data interface{}) error { return l.Log(LogLevelError, str, data) }
 
+// Debug is a shorthand for debug logging on default logger.
+func Debug(str string, data interface{}) error { return DefaultLogger.Debug(str, data) }
+
+// Info is a shorthand for info logging on default logger.
+func Info(str string, data interface{}) error { return DefaultLogger.Info(str, data) }
+
+// Warning is a shorthand for warning logging on default logger.
+func Warning(str string, data interface{}) error { return DefaultLogger.Warning(str, data) }
+
+// Error is a shorthand for error logging on default logger.
+func Error(str string, data interface{}) error { return DefaultLogger.Error(str, data) }
+
+// Log is a shorthand for logging on default logger.
+func Log(logLevel LogLevel, str string, data interface{}) error {
+	return DefaultLogger.Log(logLevel, str, data)
+}
+
 // Log logs a message as specified by the Logger. Each message is output as a
 // JSON object with `str' in the "message" field, `data' in the "data" field
 // (if not nil) and values from the context in "context".
