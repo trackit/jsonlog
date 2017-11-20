@@ -29,11 +29,11 @@ type Logger struct {
 
 // message represents a single messaged logged by a Logger.
 type message struct {
-	Message string                 `json:"message"`
 	Level   string                 `json:"level"`
 	Time    time.Time              `json:"time"`
-	Context map[string]interface{} `json:"context,omitempty"`
+	Message string                 `json:"message"`
 	Data    interface{}            `json:"data,omitempty"`
+	Context map[string]interface{} `json:"context,omitempty"`
 }
 
 const (
