@@ -9,7 +9,7 @@ import (
 
 // TestWithLogLevel tests creating new loggers with given log levels.
 func TestWithLogLevel(t *testing.T) {
-	for l, _ := range logLevelNames {
+	for l := range logLevelNames {
 		logger := DefaultLogger.WithLogLevel(l)
 		if logger.logLevel != l {
 			t.Errorf("Log level %v should be %v.", logger.logLevel, l)
@@ -36,23 +36,23 @@ type testSimpleLogsExample struct {
 // from the context.
 func TestSimpleLogs(t *testing.T) {
 	examples := []testSimpleLogsExample{
-		testSimpleLogsExample{
+		{
 			"Some log message.",
 			LogLevelDebug,
 		},
-		testSimpleLogsExample{
+		{
 			"A very long log message. It really shouldn't change anything as the code doesn't really care about that. I don't think I will add any sort of protection for this. Instead I will just consider it is the responsibility of the caller to ensure they won't log huge amounts of data.",
 			LogLevelDebug,
 		},
-		testSimpleLogsExample{
+		{
 			"",
 			LogLevelError,
 		},
-		testSimpleLogsExample{
+		{
 			"Let us add some \x00\x00 null bytes.",
 			LogLevelDebug,
 		},
-		testSimpleLogsExample{
+		{
 			"Template strings and escapes? %v %c %% \\\\\\",
 			LogLevelInfo,
 		},
@@ -103,7 +103,7 @@ func TestLogsWithDataMapStringString(t *testing.T) {
 		if err != nil {
 			t.Errorf("Parsing output JSON errored with '%s'.", err.Error())
 		} else {
-			for k, _ := range example {
+			for k := range example {
 				if example[k] != output.Data[k] {
 					t.Errorf("Output '%s' should be '%s'.", output.Data[k], example[k])
 				}
@@ -121,19 +121,19 @@ type testLogsWithContextData struct {
 
 func TestLogsWithContextData(t *testing.T) {
 	examples := []testLogsWithContextData{
-		testLogsWithContextData{
+		{
 			"stringContextKey",
 			"string",
 			"foobar",
 			true,
 		},
-		testLogsWithContextData{
+		{
 			424242,
 			"integer",
 			float64(42),
 			true,
 		},
-		testLogsWithContextData{
+		{
 			24,
 			"unused",
 			"nothere",
