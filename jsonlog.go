@@ -1,4 +1,4 @@
-// Package logs provides structured JSON logging with arbitrary data. It
+// Package jsonlog provides structured JSON logging with arbitrary data. It
 // supports contexts and can extract values from these.
 package jsonlog
 
