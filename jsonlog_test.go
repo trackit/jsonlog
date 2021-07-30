@@ -75,7 +75,7 @@ func TestSimpleLogs(t *testing.T) {
 					t.Errorf("Output message '%s' but input was '%s'.", output.Message, example.message)
 				}
 				if output.Level != logLevelNames[example.logLevel] {
-					t.Errorf("Output log level '%s' but input was '%s'.", output.Level, example.logLevel)
+					t.Errorf("Output log level '%s' but input was '%v'.", output.Level, example.logLevel)
 				}
 			}
 		}
